@@ -1,2 +1,12 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<h1>Events</h1>
+<% if @events.any? %>
+  <% @events.each do |event| %>
+    <div class='event-container'>
+      <h2 class='card title'><%= event.title %></h2>
+      <p class='card description'><%= event.description %></p>
+      <p class='card date'><%= event.date %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>No Events to Show!</p>
+<% end %>
