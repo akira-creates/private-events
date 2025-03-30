@@ -2,9 +2,11 @@
 <% if @events.any? %>
   <% @events.each do |event| %>
     <div class='event-container'>
-      <h2 class='card title'><%= event.title %></h2>
+      <h2 class='card title'><%= event.name %></h2>
       <p class='card description'><%= event.description %></p>
       <p class='card date'><%= event.date %></p>
+      <p class='card location'><%= event.location %></p>
+      <p class='card creator'> <%=event.creator.username%> </p>
     </div>
   <% end %>
 <% else %>

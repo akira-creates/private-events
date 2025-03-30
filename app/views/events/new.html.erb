@@ -1,0 +1,27 @@
+<h1>Create a New Event</h1>
+
+<%= form_with model: @event, local: true do |form| %>
+    <div>
+        <%= form.label :name, "Event Title" %>
+        <%= form.text_field :name, required: true %>
+    </div>
+
+    <div>
+        <%= form.label :description, "Event Description" %>
+        <%= form.text_area :description, required: true %>
+    </div>
+
+    <div>
+        <%= form.label :date, "Event Date" %>
+        <%= form.date_field :date, required: true %>
+    </div>
+
+    <div>
+        <%= form.label :location, "Event Location" %>
+        <%= form.text_field :location, required: true %>
+    </div>
+
+    <div>
+        <%= form.submit "Create Event" %>
+    </div>
+<% end %>
