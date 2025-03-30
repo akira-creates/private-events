@@ -1,0 +1,10 @@
+<h1><%= @user.first_name %>'s Events</h1>
+
+<h2>Events</h2>
+<ul>
+    <% @user.events.each do |event| %>
+        <li>
+            <strong><%= link_to event.title, event_path(event) %></strong> - <%= event.date.strftime("%B %d, %Y") %>
+        </li>
+    <% end %>
+</ul>
