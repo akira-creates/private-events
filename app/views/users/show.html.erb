@@ -4,7 +4,7 @@
 <ul>
     <% @user.events.each do |event| %>
         <li>
-            <strong><%= link_to event.title, event_path(event) %></strong> - <%= event.date.strftime("%B %d, %Y") %>
+            <strong><%= link_to event.name, event_path(event) %></strong> - <%= event.date.strftime("%B %d, %Y") %>
         </li>
     <% end %>
 </ul>
