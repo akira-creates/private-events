@@ -6,7 +6,7 @@
       <p class='card description'><%= event.description %></p>
       <p class='card date'><%= event.date %></p>
       <p class='card location'><%= event.location %></p>
-      <p class='card creator'> <%= link_to event.creator.username, user_path(event.creator) %> </p>
+      <p class='card creator'>Created by: <%= link_to event.creator.username, user_path(event.creator) %> </p>
     </div>
   <% end %>
 <% else %>

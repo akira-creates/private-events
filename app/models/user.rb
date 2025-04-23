@@ -7,4 +7,8 @@ class User < ApplicationRecord
 
   has_many :attendances, foreign_key: :attendee_id, dependent: :destroy
   has_many :attended_events, through: :attendances, source: :attended_event
+
+  def attending?(event)
+    attended_events.include?(event)
+  end
 end

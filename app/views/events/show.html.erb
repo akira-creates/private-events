@@ -4,5 +4,11 @@
 <p><strong>Location:</strong> <%= @event.location %></p>
 <p><strong>Description:</strong> <%= @event.description %></p>
 
+<% if current_user && !current_user.attending?(@event) %>
+  <%= button_to "Attend Event", event_attendances_path(@event), method: :post %>
+<% elsif current_user %>
+  <%= button_to "Cancel Attendance", event_attendance_path(@event, current_user.attendances.find_by(attended_event: @event)), method: :delete %>
+<% end %>
+
 <%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-primary' %>
 <%= link_to 'Back to Events', events_path, class: 'btn btn-secondary' %>
