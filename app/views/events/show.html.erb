@@ -4,7 +4,25 @@
 <p><strong>Location:</strong> <%= @event.location %></p>
 <p><strong>Description:</strong> <%= @event.description %></p>
 
-<% if current_user && !current_user.attending?(@event) %>
+<% if current_user %>
+  <% if @event.date.past? %>
+    <p>Who was there?:</p>
+  <% else %>
+    <p>Who's going?:</p>
+  <% end %>
+    <ul>
+      <% @event.attendees.each do |attendee| %>
+        <li><%= link_to attendee.username, user_path(attendee) %></li>
+      <% end %>
+    </ul>
+<% else %>
+  <p> Sign in to see who's attending! </p>
+<% end %>
+
+
+<% if @event.date.past? %>
+  <p>This event is already finished!</p>
+<% elsif current_user && !current_user.attending?(@event) && @event.date.future? %>
   <%= button_to "Attend Event", event_attendances_path(@event), method: :post %>
 <% elsif current_user %>
   <%= button_to "Cancel Attendance", event_attendance_path(@event, current_user.attendances.find_by(attended_event: @event)), method: :delete %>

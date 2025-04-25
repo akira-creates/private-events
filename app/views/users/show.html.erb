@@ -1,10 +1,27 @@
-<h1><%= @user.first_name %>'s Events</h1>
+<h1><%= @user.first_name %> <%= @user.last_name %> <em>(<%= @user.username %>)</em></h1>
 
-<h2>Events</h2>
+<h2>Events by <%= @user.first_name %></h2>
 <ul>
-    <% @user.events.each do |event| %>
-        <li>
-            <strong><%= link_to event.name, event_path(event) %></strong> - <%= event.date.strftime("%B %d, %Y") %>
-        </li>
+    <% if @user.events.empty? %>
+        <li>No events hosted yet.</li>
+    <% else %>
+        <% @user.events.each do |event| %>
+            <li>
+                <strong><%= link_to event.name, event_path(event) %></strong> - <%= event.date.strftime("%B %d, %Y") %>
+            </li>
+        <% end %>
+    <% end %>
+</ul>
+
+<h2>Attendances</h2>
+<ul>
+    <% if @user.attendances.empty? %>
+        <li>No Attendances</li>
+    <% else %>
+        <% @user.attendances.each do |attendance| %>
+            <li>
+                <strong><%= link_to attendance.attended_event.name, event_path(attendance.attended_event) %></strong> - <%= attendance.attended_event.date.strftime("%B %d, %Y") %>
+            </li>
+        <% end %>
     <% end %>
 </ul>
