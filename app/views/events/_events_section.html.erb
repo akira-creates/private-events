@@ -1,0 +1,16 @@
+<div class="#{title.parameterize}-events-container">
+  <h<%= heading_level %>><%= title %></h<%= heading_level %>>
+  <% events.each do |event| %>
+    <div class='card'>
+      <h<%= heading_level + 1 %> class='card-title'>
+        <%= link_to event.name, event_path(event) %>
+      </h<%= heading_level + 1 %>>
+      <p class='card-description'><%= event.description %></p>
+      <p class='card-date'><%= event.date.strftime('%B %d, %Y') %></p>
+      <p class='card-location'><%= event.location %></p>
+      <p class='card-creator'>
+        Created by: <%= link_to event.creator.username, user_path(event.creator) %>
+      </p>
+    </div>
+  <% end %>
+</div>

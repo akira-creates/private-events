@@ -1,14 +1,9 @@
-<h1>Events</h1>
-<% if @events.any? %>
-  <% @events.each do |event| %>
-    <div class='event-container'>
-      <h2 class='card title'><%= link_to event.name, event_path(event) %></h2>
-      <p class='card description'><%= event.description %></p>
-      <p class='card date'><%= event.date %></p>
-      <p class='card location'><%= event.location %></p>
-      <p class='card creator'>Created by: <%= link_to event.creator.username, user_path(event.creator) %> </p>
-    </div>
+<div class='all-events-container'>
+  <% if @events.any? %>
+    <%= render 'events_section', events: @events.future, title: 'Upcoming Events', heading_level: 1 %>
+    <hr>
+    <%= render 'events_section', events: @events.past, title: 'Past Events', heading_level: 2 %>
+  <% else %>
+    <h2>No Events to Show!</h2>
   <% end %>
-<% else %>
-  <p>No Events to Show!</p>
-<% end %>
+</div>
