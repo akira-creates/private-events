@@ -16,9 +16,19 @@
 <h2>Attendances</h2>
 <ul>
     <% if @user.attendances.empty? %>
-        <li>No Attendances</li>
+        <li>No Attendances to show... yet!</li>
     <% else %>
+        <h3>Upcoming events:</h3>
         <% @user.attendances.each do |attendance| %>
+            <% next if attendance.attended_event.date.past? %>
+            <li>
+                <strong><%= link_to attendance.attended_event.name, event_path(attendance.attended_event) %></strong> - <%= attendance.attended_event.date.strftime("%B %d, %Y") %>
+            </li>
+        <% end %>
+        
+        <h3>Past events:</h3>
+        <% @user.attendances.each do |attendance| %>
+            <% next if attendance.attended_event.date.future? %>
             <li>
                 <strong><%= link_to attendance.attended_event.name, event_path(attendance.attended_event) %></strong> - <%= attendance.attended_event.date.strftime("%B %d, %Y") %>
             </li>

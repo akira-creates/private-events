@@ -14,7 +14,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @creator = @event.build_creator(id: current_user.id)
+    @event.creator = current_user
     if @event.save
       redirect_to @event, notice: "Event was successfully created."
     else
@@ -25,6 +25,26 @@ class EventsController < ApplicationController
   def edit
     @event = Event.find(params[:id])
   end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to @event, notice: "Event was successfully updated."
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    if @event.destroy
+      redirect_to events_path, notice: "Event was successfully deleted."
+    else
+      redirect_to @event, alert: "Failed to delete the event."
+    end
+  end
+
+  private
 
   def event_params
     params.require(:event).permit(:name, :description, :location, :date)
