@@ -8,6 +8,9 @@
   <% if @event.date.past? %>
     <p>Who was there?:</p>
   <% else %>
+    <% if @event.private_flag && @event.creator == current_user %>
+      <%= link_to 'Invite Users', new_event_invitation_path(@event) %>
+    <% end %>
     <p>Who's going?:</p>
   <% end %>
     <ul>

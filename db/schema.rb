@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_26_234242) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_27_062556) do
   create_table "attendances", force: :cascade do |t|
     t.integer "attendee_id", null: false
     t.integer "attended_event_id", null: false
@@ -31,6 +31,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_26_234242) do
     t.boolean "private_flag"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "user_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_invitations_on_event_id"
+    t.index ["user_id"], name: "index_invitations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -48,4 +58,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_26_234242) do
 
   add_foreign_key "attendances", "events", column: "attended_event_id"
   add_foreign_key "attendances", "users", column: "attendee_id"
+  add_foreign_key "invitations", "events"
+  add_foreign_key "invitations", "users"
 end

@@ -1,0 +1,24 @@
+/* app/assets/stylesheets/invitations.scss */
+.invitations-list {
+    list-style: none;
+    padding: 0;
+}
+  
+.invitation-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+
+    &:hover {
+        background-color: #e9ecef;
+    }
+}
+  
+.invitation-actions {
+    display: flex;
+    gap: 0.5rem;
+}

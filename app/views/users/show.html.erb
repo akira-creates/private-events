@@ -1,5 +1,35 @@
 <h1><%= @user.first_name %> <%= @user.last_name %> <em>(<%= @user.username %>)</em></h1>
 
+<% if current_user == @user %>
+  <h2>Your Invitations</h2>
+  <% if current_user.invitations.pending.any? %>
+    <ul class="invitations-list">
+      <% current_user.invitations.pending.each do |invitation| %>
+        <li class="invitation-card">
+          <div class="invitation-details">
+            <strong><%= invitation.event.name %></strong>
+            <small>Invited by: <%= invitation.event.creator.username %></small>
+          </div>
+          <div class="invitation-actions">
+            <%= button_to 'Accept', 
+                  invitation_path(invitation, status: :accepted, event_id: invitation.event.id), 
+                  method: :patch, 
+                  class: 'btn btn-success btn-sm',
+                  data: { turbo: false } %>
+            <%= button_to 'Decline', 
+                  invitation_path(invitation, status: :declined, event_id: invitation.event.id), 
+                  method: :patch, 
+                  class: 'btn btn-danger btn-sm',
+                  data: { turbo: false } %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have no pending invitations.</p>
+  <% end %>
+<% end %>
+
 <%= render partial: 'users/list_attendance',
            locals: { 
              title: "Events by #{@user.first_name}",

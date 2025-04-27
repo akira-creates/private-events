@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [ :show ]
+
   resources :events do
     resources :attendances, only: [ :create, :destroy ]
+    resources :invitations, only: [ :new, :create ]
   end
+
+  resources :invitations, only: [ :update, :destroy ]
 
   get "events/index"
 
