@@ -1,6 +1,7 @@
 <div class="#{title.parameterize}-events-container">
   <h<%= heading_level %>><%= title %></h<%= heading_level %>>
   <% events.each do |event| %>
+    <% next if event.is_private? && ( current_user.nil? || !current_user.attending?(event) ) %>
     <div class='card'>
       <h<%= heading_level + 1 %> class='card-title'>
         <%= link_to event.name, event_path(event) %>

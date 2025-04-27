@@ -3,6 +3,10 @@ class Event < ApplicationRecord
   has_many :attendances, foreign_key: :attended_event_id, dependent: :destroy
   has_many :attendees, through: :attendances, source: :attendee
 
+  def is_private?
+    private_flag
+  end
+
   scope :past, -> { where("date < ?", Time.current) }
   scope :future, -> { where("date >= ?", Time.current) }
 end

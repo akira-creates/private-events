@@ -1,0 +1,14 @@
+<% if events.empty? %>
+  <li><%= empty_message %></li>
+<% else %>
+  <% events.each do |event| %>
+    <% next if event.is_private? && ( current_user.nil? || !current_user.attending?(event) ) %>
+    <li>
+      <strong><%= link_to event.name, event_path(event) %></strong> - 
+      <%= event.date.strftime("%B %d, %Y") %>
+      <% if defined?(show_status) && show_status %>
+        <span class="text-muted">(<%= event.future? ? 'Upcoming' : 'Past' %>)</span>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

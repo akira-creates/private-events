@@ -20,6 +20,11 @@
     </div>
 
     <div>
+        <%= form.label :private_flag, "Private Event" %>
+        <%= form.check_box :private_flag %>
+    </div>
+
+    <div>
         <%= form.submit "Create Event" %>
     </div>
 <% end %>

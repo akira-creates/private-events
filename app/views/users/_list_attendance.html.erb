@@ -1,0 +1,8 @@
+<h2><%= title %></h2>
+<ul>
+  <%= render partial: 'users/list_event', 
+             locals: { 
+               events: events,
+               empty_message: empty_message 
+             } %>
+</ul>
